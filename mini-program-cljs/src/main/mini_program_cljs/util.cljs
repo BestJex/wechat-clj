@@ -92,6 +92,20 @@
   (js-wx "scanCode"
     #js {:success success}))
 
+(comment
+  (call-promise-1
+    (fn [res] (alert (str res)))
+    (can-user-info)))
+(defn can-user-info []
+  (js-wx "canIUse" "button.open-type.getUserInfo"))
+
+(comment
+  (call-promise-1
+    (fn [res] (alert (str res)))
+    (can-phone-number)))
+(defn can-phone-number []
+  (js-wx "canIUse" "button.open-type.getPhoneNumber"))
+
 ;; Page内部或者util里面才能执行成功的方法, 或者再控制台也能执行成功
 (defn get-current-page []
   (let [pages (js/getCurrentPages)

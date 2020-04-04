@@ -45,6 +45,19 @@
           (cjson/parse-string true))]
     (op-fn res)))
 
+(comment
+
+  (let [{:keys [encrypted_data session_key iv]}
+        {:encrypted_data "n+09lXR0mYhrDbXA+SLUJzfpyj1QMdKAJqjvCEnPCYXxdas32dasdsadasdsa"
+         :iv "Uk8y2+lQ94GO+xdsadasdasg=="
+         :session_key "wt9XtXr7GyXVfTt56dasdas=="}]
+    (decrypt-wxdata
+      {:encrypted-data encrypted_data
+       :session-key session_key
+       :iv iv}))
+;; => {:phoneNumber "137********", :purePhoneNumber "137********", :countryCode "86", :watermark {:timestamp 1585818768, :appid "wxc321sda321das321"}}
+  )
+
 (defn decrypt-wxdata
   [{:keys [encrypted-data session-key iv]}]
   (-> (u/decrypt encrypted-data session-key iv "UTF-8")

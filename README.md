@@ -109,14 +109,23 @@ MiniCljs.alert("Hello, mini-program-cljs!");
 
 ``` html
 <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取用户信息登陆</button>
+<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"> 获取用户手机登陆</button>
+
 ```
 
 ```js
 Page({
     getUserInfo: function(e) {
-      MiniCljs.login({successFn: function(res) {console.log(res)},
-                      iv: e.detail.iv,
-                      encryptedData: e.detail.encryptedData})
+      MiniCljs.login({successFn: function(res) {
+                      encrypted_data: res.encryptedData,
+                      iv: res.iv,
+                      jscode: res.code}})
+    },
+    getPhoneNumber: function(e) {
+      MiniCljs.login({successFn: function(res) {
+                      encrypted_data: res.encryptedData,
+                      iv: res.iv,
+                      jscode: res.code}})
     }
 })
 
